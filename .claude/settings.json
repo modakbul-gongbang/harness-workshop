@@ -1,0 +1,68 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Bash(./scripts/verify.sh)",
+      "Bash(python3 scripts/task.py *)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(gh pr create *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/remind-guide.py # 실행 전: 수정 경로에 맞는 가이드 안내와 검증 보고서 작성 권한 분리",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-completion.py # 완료 선언 시: 현재 코드와 일치하는 독립 검증 PASS를 확인하고 미완료 종료를 구분",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/session-context.py # 시작·재개·컨텍스트 압축 후: Node 환경과 활성 작업 및 읽을 PRD 안내",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/lint-changed-file.py # 파일 편집 후: 변경한 TS/TSX 파일만 ESLint 검사하고 오류 안내 (자동 수정 없음)",
+            "timeout": 25
+          }
+        ]
+      }
+    ]
+  }
+}

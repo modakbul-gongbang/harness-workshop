@@ -1,0 +1,18 @@
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+data/
+.artifacts/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+.DS_Store
+# Only PRDs belong to versioned task folders.
+docs/tasks/*/*
+!docs/tasks/*/prd.md

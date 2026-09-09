@@ -1,0 +1,64 @@
+:root {
+  --bg: #f8faf9; --surface: #fff; --ink: #172d26; --muted: #5e7068;
+  --accent: #17684a; --line: #d8e2dd; --danger: #ad302a; --radius: 8px;
+  --space: 8px; --shadow: 0 12px 40px #172d2620;
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  color: var(--ink); background: var(--bg); font-size: 16px; line-height: 1.6;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.shell { max-width: 800px; margin: 64px auto; padding: 0 24px; }
+.login-shell { max-width: 440px; margin: 72px auto; padding: 0 24px; }
+h1 { font-size: 32px; line-height: 1.3; margin: 0; letter-spacing: -1px; }
+h2 { font-size: 18px; margin: 0; }
+.eyebrow { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 2px; margin: 0 0 8px; }
+.muted { color: var(--muted); }
+header, .account, .input-row, .actions, .list-heading { display: flex; align-items: center; gap: 8px; }
+header, .list-heading { justify-content: space-between; }
+.account { gap: 16px; font-size: 14px; }
+button, input { font: inherit; }
+button { border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 14px; color: var(--ink); background: var(--surface); cursor: pointer; min-height: 44px; white-space: nowrap; }
+button:hover { background: #edf3ef; }
+button:disabled { opacity: .55; cursor: wait; }
+button.primary { color: white; background: var(--accent); border-color: var(--accent); }
+button.danger { color: var(--danger); border-color: var(--danger); }
+:focus-visible { outline: 3px solid #2c8bcb; outline-offset: 3px; }
+input { min-width: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: white; color: var(--ink); }
+input:focus { border-color: var(--accent); }
+.create-form { margin-top: 32px; }
+.create-form label, .login-form label { display: block; margin-bottom: 8px; font-weight: 600; }
+.input-row input { flex: 1; width: 100%; }
+.login-form { margin: 32px 0; display: grid; gap: 8px; }
+.login-form button { margin-top: 16px; }
+.login-form label { margin: 8px 0 0; }
+.training { border-top: 1px solid var(--line); padding-top: 24px; }
+.training p { margin: 8px 0; }
+#message { min-height: 26px; margin: 16px 0; }
+.error { color: var(--danger); }
+.list-heading { padding: 8px 0 16px; border-bottom: 1px solid var(--line); }
+#todos { list-style: none; padding: 0; margin: 0; }
+.todo-row { padding: 18px 0; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 16px; }
+.todo-content { flex: 1; min-width: 0; }
+.todo-title { margin: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.todo-row.completed .todo-title { color: var(--muted); text-decoration: line-through; }
+.state { color: var(--muted); font-size: 12px; }
+.todo-row.completed .state { color: var(--accent); }
+.edit-form { width: 100%; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.edit-form label { font-size: 14px; }
+.edit-form input { flex: 1; }
+.empty { text-align: center; padding: 48px 0; }
+footer { margin-top: 32px; font-size: 12px; color: var(--muted); }
+dialog { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; max-width: min(440px, calc(100% - 32px)); box-shadow: var(--shadow); }
+dialog::backdrop { background: #172d2650; }
+#delete-title { overflow-wrap: anywhere; }
+[hidden] { display: none !important; }
+@media (max-width: 560px) {
+  .shell, .login-shell { margin: 32px auto; padding: 0 16px; }
+  header { align-items: flex-start; gap: 16px; }
+  .account { flex-direction: column; align-items: flex-end; gap: 4px; }
+  h1 { font-size: 28px; }
+  .todo-row { flex-wrap: wrap; gap: 8px; }
+  .todo-content { flex-basis: 100%; }
+  .actions { margin-left: auto; flex-wrap: wrap; }
+  .edit-form input { flex-basis: calc(100% - 90px); }
+}
